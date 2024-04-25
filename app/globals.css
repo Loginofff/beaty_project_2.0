@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (min-width: 1200px) {
+    .max-w-custom {
+      max-width: 500px; /* ваше значение ширины в пикселях */
+      margin-left: auto; /* Центрирование блока по горизонтали */
+      margin-right: auto;
+    }
+    
+    .bg-blur-sm {
+      background-color: rgba(255, 255, 255, 0.5); /* Прозрачный белый цвет с 50% непрозрачности */
+    }
+
+    body{
+      font-family: sans-serif;
+    }
+
+    .leaflet-container{
+      height: 400px;
+
+    }
+
+  }
+
