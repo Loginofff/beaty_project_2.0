@@ -67,10 +67,10 @@ function CreateAccount() {
         </h2>
 
         <div className="w-full flex flex-col gap-5 mt-7">
-          <Input className="input-text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-          <Input className="input-text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          <Input className="input-text" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input className="input-text" type="password" placeholder="Password" value={hashPassword} onChange={(e) => setHashPassword(e.target.value)} />
+          <Input placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <Input placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <Input placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input type="password" placeholder="Password" value={hashPassword} onChange={(e) => setHashPassword(e.target.value)} />
           
           <div className=' flex flex-col gap-4 px-5'>
             <label>
