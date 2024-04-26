@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
-import Image from "next/image";
 import { FaPhone } from "react-icons/fa";
 import BookAppointment from "./BookAppointment";
 import { MdEmail } from "react-icons/md";

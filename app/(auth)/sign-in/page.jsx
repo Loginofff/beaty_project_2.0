@@ -22,7 +22,7 @@ function SignIn() {
         hashPassword: password,
       };
 
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

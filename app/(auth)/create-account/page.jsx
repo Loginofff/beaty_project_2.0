@@ -27,7 +27,7 @@ function CreateAccount() {
         hashPassword // Вместо password используем hashPassword
       };
 
-      const res = await fetch("/api/users/register", {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
