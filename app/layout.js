@@ -1,12 +1,6 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Header from "./_components/Header";
-import BackgroundAnimation from "./_components/BackgroundAnimation";
-import Footer from "./_components/Footer";
-import { Toaster } from ".//components/ui/sonner"
-
-
-
+import App from "./App";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -19,15 +13,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={outfit.className}>
-      <BackgroundAnimation />
-        <div>
-          <Header />
-          {children}
-         <Toaster/>
-          <Footer/>
-        </div>
+        <App>{children}</App>
       </body>
     </html>
   );
 }
-

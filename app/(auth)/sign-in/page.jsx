@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/ui/input';
-import { Button } from '../../components/ui/button';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-
-
+import React, { useContext, useEffect, useState } from "react";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { AuthContext } from "../../context/AuthContext";
 
 
 function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
+  const {setUser } = useContext(AuthContext)
 
   const onLoginAccount = async () => {
     try {
@@ -22,11 +22,11 @@ function SignIn() {
         hashPassword: password,
       };
 
-      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/auth/login", {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER +"/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "accept": "*/*",
+          accept: "*/*",
         },
         body: JSON.stringify(userData),
       });
@@ -37,41 +37,48 @@ function SignIn() {
 
       const data = await res.json();
       console.log(data);
+      setUser("user");
+      // sessionStorage.getItem("user", data);
       sessionStorage.setItem('user', JSON.stringify(data))
-      toast("Login successfully")
-      router.push('/')
+      toast("Login successfully");
+      router.push("/");
     } catch (error) {
       console.error("Error login account:", error);
-      toast( "falscher Login oder Passwort")
+      toast("falscher Login oder Passwort");
     }
   };
 
   useEffect(() => {
-      const user = sessionStorage.getItem('user');
-      if (user) {
-        router.push('/');
-      }  
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      router.push("/");
+    }
   }, []);
-
-
 
   return (
     <div className="flex items-baseline justify-center my-20 ">
       <div className="flex flex-col items-center justify-center p-10 bg-blur-sm">
         <h2 className="font-bold text-3xl">Authorization</h2>
-        <h2 className="text-gray-500">
-          Enter your Email and Password 
-        </h2>
+        <h2 className="text-gray-500">Enter your Email and Password</h2>
 
         <div className="w-full flex flex-col gap-5 mt-7">
-          <Input placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Button onClick={onLoginAccount} disabled={!email || !password}>
             Login
           </Button>
           <p>
-            Ich habe keine Konto{' '}
-            <Link href={'/create-account'} className="text-green-600 ml-3">
+            Ich habe keine Konto{" "}
+            <Link href={"/create-account"} className="text-green-600 ml-3">
               -Klicken Sie hier, um sich registriren
             </Link>
           </p>
