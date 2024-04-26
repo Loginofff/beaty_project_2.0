@@ -76,12 +76,12 @@ const BookAppointment = () => {
 
       setLoading(true);
 
-      const formattedTime = selectedTimeSlot.replace(/\s/g, ''); // Удалить пробелы из времени
-      const [hours, minutes] = formattedTime.split(':'); // Разделить часы и минуты
+      const formattedTime = selectedTimeSlot.replace(/\s/g, '');
+      const [hours, minutes] = formattedTime.split(':'); 
       const hours24Format = parseInt(hours) % 12 + (selectedTimeSlot.includes('PM') ? 12 : 0); // Преобразовать в 24-часовой формат
 
       const dateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours24Format, parseInt(minutes), 0);
-      const isoDateTime = dateTime.toISOString().split('.')[0]; // Убрать миллисекунды
+      const isoDateTime = dateTime.toISOString().split('.')[0];
 
       const bookingData = {
         clientId: userId,

@@ -57,7 +57,7 @@ const MasterProfile = ({ user }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`/api/users/${user.user_id}`);
+        const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${user.user_id}`);
         if (response.ok) {
           const userData = await response.json();
           console.log("User data retrieved:", userData);
@@ -95,7 +95,7 @@ const MasterProfile = ({ user }) => {
     console.log("Data being sent to the server:", userDetails);
 
     try {
-      const response = await fetch(`/api/users/${user.user_id}/details`, {
+      const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${user.user_id}/details`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const MasterProfile = ({ user }) => {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch(`/api/categories`);
+        const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/categories`);
         if (response.ok) {
           const data = await response.json();
           setCategories(data);
@@ -151,7 +151,7 @@ const MasterProfile = ({ user }) => {
     async function fetchProcedures() {
       if (userData && userData.procedureIds) {
         const promises = userData.procedureIds.map((id) =>
-          fetch(`/api/procedures/${id}`).then((response) => response.json())
+          fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/procedures/${id}`).then((response) => response.json())
         );
         try {
           const results = await Promise.all(promises);

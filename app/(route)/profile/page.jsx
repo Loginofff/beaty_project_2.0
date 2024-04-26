@@ -39,13 +39,13 @@ const ProfilePage = () => {
     setUserEmail(decodedToken.sub);
     setUserId(decodedToken.user_id);
 
-    // Получение информации о пользователе после получения роли
+  
     if (decodedToken.roles === 'MASTER') {
       getMasterById(decodedToken.user_id);
     }
   }, []);
 
-  // Получение информации о пользователе
+  
   const getMasterById = async (userId) => {
     try {
       const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${userId}`, {

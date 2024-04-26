@@ -7,12 +7,12 @@ import Link from "next/link";
 function MasterList() {
 
   const categories = [
-    { id: 1, name: 'Haarschnitt' },
-    { id: 2, name: 'Maniküre' },
-    { id: 3, name: 'Kosmetiker' },
-    { id: 5, name: 'Epilation' },
-    { id: 6, name: 'Tätowierung' },
-    { id: 7, name: 'Piercing' }
+    { id: 1, name: "FRISEUR" },
+    { id: 2, name: "NÄGEL" },
+    { id: 3, name: "KOSMETIK" },
+    { id: 5, name: "HAARENTFERNUNG" },
+    { id: 6, name: "TATTOO" },
+    { id: 7, name: "MASSAGE" },
   ];
 
   const [masterList, setMasterList] = useState([]);
