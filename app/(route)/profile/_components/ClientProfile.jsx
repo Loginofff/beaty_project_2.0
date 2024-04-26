@@ -29,7 +29,7 @@ const ClientProfile = ({ user }) => {
         formData.append('profileImage', profileImage);
       }
 
-      const response = await fetch(`/api/metadata/${user.user_id}/profile`, {
+      const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/metadata/${user.user_id}/profile`, {
         method: 'PUT',
         body: formData,
       });

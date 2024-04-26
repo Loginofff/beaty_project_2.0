@@ -14,7 +14,7 @@ function Details({params}) {
 
   const getMasterById = async () => {
     try {
-      const res = await fetch(`/api/users/${params.recordId}`, {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${params.recordId}`, {
         headers: { accept: "*/*" },
       });
       const data = await res.json();

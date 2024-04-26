@@ -16,7 +16,7 @@ function CategoryList() {
 
   const getCategoryList = async () => {
     try {
-      const res = await fetch("/api/categories", {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/categories", {
         headers: { accept: "*/*" },
       });
       const arr = await res.json();

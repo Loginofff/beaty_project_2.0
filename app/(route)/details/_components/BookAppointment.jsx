@@ -104,7 +104,7 @@ const BookAppointment = () => {
       console.log("Request being sent:", requestOptions);
 
     
-      const res = await fetch('/api/bookings', requestOptions);
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+'/api/bookings', requestOptions);
       const data = await res.json();
 
       if (!res.ok) {

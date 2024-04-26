@@ -26,7 +26,7 @@ const MasterProfile = ({ user }) => {
   
     try {
       const response = await fetch(
-        `/api/metadata/${user.user_id}/profileImages`,
+        process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/metadata/${user.user_id}/profileImages`,
         {
           method: "POST",
           headers: {

@@ -24,7 +24,7 @@ function MasterList() {
 
   const getMasterList = async () => {
     try {
-      const res = await fetch("/api/users/masters", {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/users/masters", {
         headers: { accept: "*/*" },
       });
       const arr = await res.json();

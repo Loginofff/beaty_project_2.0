@@ -11,7 +11,7 @@ function MasterDetails({ master }) {
   useEffect(() => {
     async function fetchProcedures() {
       const promises = master.procedureIds.map((id) =>
-        fetch(`/api/procedures/${id}`).then((response) => response.json())
+        fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/procedures/${id}`).then((response) => response.json())
       );
       const results = await Promise.all(promises);
       setProcedures(results);

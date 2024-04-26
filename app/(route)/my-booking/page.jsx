@@ -35,7 +35,7 @@ function MyBooking({ accessToken }) {
         const userId = decodedToken.user_id;
         console.log("User ID:", userId);
   
-        const res = await fetch(`/api/bookings/${userId}?status=CONFIRMED`, {
+        const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/bookings/${userId}?status=CONFIRMED`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

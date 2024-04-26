@@ -48,7 +48,7 @@ const ProfilePage = () => {
   // Получение информации о пользователе
   const getMasterById = async (userId) => {
     try {
-      const res = await fetch(`/api/users/${userId}`, {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${userId}`, {
         headers: { accept: "*/*" },
       });
       const data = await res.json();
