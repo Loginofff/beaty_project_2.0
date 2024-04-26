@@ -31,7 +31,7 @@ function MasterDetails({ master }) {
     { id: 7, name: "MASSAGE" },
   ];
 
-  function getCategoryNames(categoryIds) {
+  function getCategoryNames(categoryIds, categories) {
     return categoryIds
       .map((id) => {
         const category = categories.find((category) => category.id === id);
@@ -54,9 +54,13 @@ function MasterDetails({ master }) {
             />
           </div>
           <div className="col-span-2 mt-5 flex flex-col items-center gap-2">
-            <h2 className="mt-2 text-[15px] bg-green-700 p-3 rounded-full px-2 text-white">
-              {getCategoryNames(master.categoryIds)}
-            </h2>
+          {master && master.categoryIds && (
+  <h2 className="mt-2 text-[15px] bg-green-700 p-3 rounded-full px-2 text-white">
+    {getCategoryNames(master.categoryIds, categories)}
+  </h2>
+)}
+
+
             <h2 className="font-bold">
               {master.firstName} {master.lastName}
             </h2>
@@ -79,9 +83,11 @@ function MasterDetails({ master }) {
               >
                 {procedure.name} - {procedure.price} EUR
               </div>
+              
             ))}
             <BookAppointment />
           </div>
+          <div className="bg-green-700 text-white p-2 mt-2 rounded-lg w-full">{master.description}</div>
         </div>
       )}
     </>
@@ -89,4 +95,3 @@ function MasterDetails({ master }) {
 }
 
 export default MasterDetails;
-
