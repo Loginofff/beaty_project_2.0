@@ -1,20 +1,18 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/ui/input';
-import { Button } from '../../components/ui/button';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-
-
+import React, { useEffect, useState } from "react";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 function CreateAccount() {
-  const [firstName, setFirstName] = useState(''); 
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [hashPassword, setHashPassword] = useState('');
-  const [role, setRole] = useState('CLIENT'); 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [hashPassword, setHashPassword] = useState("");
+  const [role, setRole] = useState("CLIENT");
   const router = useRouter();
 
   const onCreateAccount = async () => {
@@ -24,17 +22,20 @@ function CreateAccount() {
         lastName,
         email,
         role,
-        hashPassword // Вместо password используем hashPassword
+        hashPassword, // Вместо password используем hashPassword
       };
 
-      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+"/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "accept": "*/*",
-        },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_PRODUCTION_SERVER + "/api/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            accept: "*/*",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (!res.ok) {
         throw new Error("Failed to create account");
@@ -42,21 +43,21 @@ function CreateAccount() {
 
       const data = await res.json();
       console.log(data);
-      sessionStorage.setItem('user', JSON.stringify(data))
-      toast("Account created successfully")
-      router.push('/')
+      sessionStorage.setItem("user", JSON.stringify(data));
+      toast("Account created successfully");
+      router.push("/");
     } catch (error) {
       console.error("Error creating account:", error);
-      toast("Error while creating account")
+      toast("Error while creating account");
     }
   };
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user');
+    const user = sessionStorage.getItem("user");
     if (user) {
-      router.push('/');
-    }  
-}, []);
+      router.push("/");
+    }
+  }, []);
 
   return (
     <div className="flex items-baseline justify-center my-20 ">
@@ -67,18 +68,35 @@ function CreateAccount() {
         </h2>
 
         <div className="w-full flex flex-col gap-5 mt-7">
-          <Input placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-          <Input placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          <Input placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Password" value={hashPassword} onChange={(e) => setHashPassword(e.target.value)} />
-          
-          <div className=' flex flex-col gap-4 px-5'>
+          <Input
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Input
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Input
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={hashPassword}
+            onChange={(e) => setHashPassword(e.target.value)}
+          />
+
+          <div className=" flex flex-col gap-4 px-5">
             <label>
               <input
                 type="radio"
                 value="CLIENT"
-                checked={role === 'CLIENT'}
-                onChange={() => setRole('CLIENT')}
+                checked={role === "CLIENT"}
+                onChange={() => setRole("CLIENT")}
               />
               Client
             </label>
@@ -86,19 +104,24 @@ function CreateAccount() {
               <input
                 type="radio"
                 value="MASTER"
-                checked={role === 'MASTER'}
-                onChange={() => setRole('MASTER')}
+                checked={role === "MASTER"}
+                onChange={() => setRole("MASTER")}
               />
               Master
             </label>
           </div>
 
-          <Button onClick={onCreateAccount} disabled={!firstName || !lastName || !email || !hashPassword}>
+          <Button
+            className=" inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300"
+            style={{ backgroundColor: "#006400", color: "#ffffff" }}
+            onClick={onCreateAccount}
+            disabled={!firstName || !lastName || !email || !hashPassword}
+          >
             Eine Konto erstellen
           </Button>
           <p>
-            Ich habe ein Konto{' '}
-            <Link href={'/sign-in'} className="text-green-600 ml-3">
+            Ich habe ein Konto{" "}
+            <Link href={"/sign-in"} className="text-green-600 ml-3">
               -Klicken Sie hier, um sich anzumelden
             </Link>
           </p>

@@ -66,7 +66,7 @@ function Header() {
 
       {!user ? (
         <Link href={"/sign-in"}>
-          <Button>Get Started</Button>
+          <Button >Get Started</Button>
         </Link>
       ) : (
         <Popover asChild>
