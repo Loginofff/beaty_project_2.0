@@ -26,8 +26,8 @@ function MasterDetails({ master }) {
     { id: 1, name: "FRISEUR" },
     { id: 2, name: "NÄGEL" },
     { id: 3, name: "KOSMETIK" },
-    { id: 5, name: "HAARENTFERNUNG" },
-    { id: 6, name: "TATTOO" },
+    { id: 5, name: "HAARENVERFUNG" },
+    { id: 6, name: "MAKEUP" },
     { id: 7, name: "MASSAGE" },
   ];
 

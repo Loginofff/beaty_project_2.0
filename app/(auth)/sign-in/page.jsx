@@ -64,8 +64,8 @@ function SignIn() {
         </h2>
 
         <div className="w-full flex flex-col gap-5 mt-7">
-          <Input placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input className="input-text" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input className="input-text" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <Button onClick={onLoginAccount} disabled={!email || !password}>
             Login
           </Button>
