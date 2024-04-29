@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
 import { Calendar } from "../../../components/ui/calendar";
@@ -8,7 +6,7 @@ import { Clock } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { toast } from 'sonner';
 
-const BookAppointment = () => {
+const BookAppointment = ({ masterId, selectedProcedureId }) => {
   const [date, setDate] = useState(new Date());
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
@@ -32,15 +30,13 @@ const BookAppointment = () => {
       console.error("User ID is missing in decoded token:", decodedToken);
       return;
     }
-
+    
     setUserId(decodedToken.user_id);
   }, []);
 
-  
   const getTime = () => {
     const timeList = [];
 
-    
     for (let i = 10; i <= 12; i++) {
       timeList.push(`${i}:00 AM`);
       timeList.push(`${i}:30 AM`);
@@ -54,24 +50,24 @@ const BookAppointment = () => {
     setTimeSlots(timeList);
   };
 
-  
   const isPastDay = (day) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return day < today;
   };
 
-  
-  const isSlotBooking = (time) => {
-    
-    return false; 
+  const isPastTime = (time) => {
+    const currentTime = new Date();
+    const selectedDateTime = new Date(date);
+    const [hours, minutes] = time.split(":");
+    selectedDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    return selectedDateTime < currentTime;
   };
 
-  
   const saveBooking = async () => {
     try {
-      if (!selectedTimeSlot) {
-        throw new Error("Please select a time slot.");
+      if (!selectedTimeSlot || !selectedProcedureId) {
+        throw new Error("Please select a time slot and a procedure.");
       }
 
       setLoading(true);
@@ -85,8 +81,8 @@ const BookAppointment = () => {
 
       const bookingData = {
         clientId: userId,
-        masterId: 13,
-        procedureId: 1,
+        masterId: masterId,
+        procedureId: selectedProcedureId,
         dateTime: isoDateTime,
       };
 
@@ -103,7 +99,6 @@ const BookAppointment = () => {
 
       console.log("Request being sent:", requestOptions);
 
-    
       const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+'/api/bookings', requestOptions);
       const data = await res.json();
 
@@ -118,7 +113,7 @@ const BookAppointment = () => {
       setDate(new Date());
     } catch (error) {
       console.error("Error saving booking:", error);
-      toast("Failed to save booking", { type: "error" });
+      toast("Wähle das Verfahren aus", { type: "error" });
     } finally {
       setLoading(false);
     }
@@ -170,7 +165,7 @@ const BookAppointment = () => {
                     {timeSlots?.map((time, index) => (
                       <h2
                         key={index}
-                        disabled={isSlotBooking(time)}
+                        disabled={isPastTime(time) || !selectedProcedureId}
                         onClick={() => setSelectedTimeSlot(time)}
                         className={`p-2 border rounded-full text-center
                           hover:bg-green-600 hover:text-white cursor-pointer
@@ -202,6 +197,3 @@ const BookAppointment = () => {
 }
 
 export default BookAppointment;
-
-
-

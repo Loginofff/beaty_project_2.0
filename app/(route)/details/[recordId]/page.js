@@ -1,25 +1,24 @@
 "use client"
 
-import React, { useEffect, useState, } from 'react';
-import MasterDetails from '../../../(route)/details/_components/MasterDetails'
+import React, { useEffect, useState } from 'react';
+import MasterDetails from '../../../(route)/details/_components/MasterDetails';
 
-function Details({params}) {
+function Details({ params }) {
 
-  
-  const [master, setMaster]=useState();
-  
+  const [master, setMaster] = useState();
+
   useEffect(() => {
-      getMasterById();
+    getMasterById();
   }, []);
 
   const getMasterById = async () => {
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${params.recordId}`, {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER + `/api/users/${params.recordId}`, {
         headers: { accept: "*/*" },
       });
       const data = await res.json();
       console.log(data);
-      setMaster(data)
+      setMaster(data);
     } catch (error) {
       console.error("Error fetching master:", error);
     }
@@ -29,20 +28,14 @@ function Details({params}) {
     <div className='p-5 md:px-20'>
       <h2 className='font-bold text-[22px]'>Information</h2>
 
-      <div className='grid grid-cols-1 md:grid-cols-4'>
-
+      <div className='grid grid-cols-1 md:grid-cols-5'>
         {/* Master details */}
         <div className='col-span-3'>
-         <MasterDetails master={master}/>
-        </div>
-
-        {/* Master suggestion */}
-        <div className=''>
-          {/* Add any additional content here */}
+          <MasterDetails master={master} />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Details;

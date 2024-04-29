@@ -22,7 +22,7 @@ function BookingList({ bookingList }) {
           if (booking.procedureId) {
             try {
               const res = await fetch(
-                process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/procedures/${booking.procedureId}`,
+                process.env.NEXT_PUBLIC_PRODUCTION_SERVER +`/api/procedures/${booking.procedureId}`,
                 {
                   method: "GET",
                   headers: {
@@ -60,7 +60,7 @@ function BookingList({ bookingList }) {
 
   const deleteBooking = async (bookingId) => {
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/bookings/${bookingId}`, {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER +`/api/bookings/${bookingId}`, {
         method: "DELETE",
         headers: {
           accept: "*/*",
@@ -92,7 +92,7 @@ function BookingList({ bookingList }) {
 >
  <div className="flex gap-2 items-center">
    <Image
-     src="/photo-4.jpg"
+     src="https://www.svgrepo.com/show/530375/calendar.svg"
      alt="Appointment"
      width={70}
      height={70}
