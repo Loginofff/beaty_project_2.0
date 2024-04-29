@@ -34,7 +34,7 @@ function Search({ params }) {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`/api/users/by-category/${categoryId}`);
+      const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER +`/api/users/by-category/${categoryId}`);
       if (!response.ok) {
         throw new Error("Failed to fetch");
       }
