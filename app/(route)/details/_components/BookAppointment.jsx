@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../../components/ui/dialog";
-import { Calendar } from "../../../components/ui/calendar";
+import { Calendar } from "react-calendar"; 
 import { CalendarDays } from "lucide-react";
 import { Clock } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { toast } from 'sonner';
+
+import 'react-calendar/dist/Calendar.css'; 
 
 const BookAppointment = ({ masterId, selectedProcedureId }) => {
   const [date, setDate] = useState(new Date());
@@ -147,53 +149,54 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
                   Datum auswählen
                 </h2>
                 <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  disabled={isPastDay(date)}
-                  className="rounded-md border" />
-              </div>
-
-              <div>
-                <div className="mt-3 md:mt-0">
-                  <h2 className="flex gap-2 items-center mb-3">
-                    <Clock className="text-green-800 h-5 w-5" />
-                    Verfügbare Zeit
-                  </h2>
-
-                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-3">
-                    {timeSlots?.map((time, index) => (
-                      <h2
-                        key={index}
-                        disabled={isPastTime(time) || !selectedProcedureId}
-                        onClick={() => setSelectedTimeSlot(time)}
-                        className={`p-2 border rounded-full text-center
-                          hover:bg-green-600 hover:text-white cursor-pointer
-                          ${time === selectedTimeSlot && "bg-green-600 text-white"}`}>
-                        {time}
-                      </h2>
-                    ))}
-                  </div>
+                  value={date} // Значение календаря
+                  onChange={setDate} // Обработчик изменения даты
+                  minDate={new Date()} // Минимальная дата (не позволяет выбирать прошедшие даты)
+                  className="rounded-md border p-2" // Стилизация календаря
+                />
                 </div>
-              </div>
-            </div>
-          </DialogDescription>
-        </DialogHeader>
 
-        <DialogFooter className="flex justify-between mr-5">
-          <DialogClose asChild>
-            <div>
-              <Button className="m-3" variant="destructive" >Close</Button>
-              <Button onClick={saveBooking} disabled={!(date && selectedTimeSlot) || loading}>
-                {loading ? "Saving..." : "Aufzeichnen"}
-              </Button>
-            </div>
-          </DialogClose>
-        </DialogFooter>
+<div>
+  <div className="mt-3 md:mt-0">
+    <h2 className="flex gap-2 items-center mb-3">
+      <Clock className="text-green-800 h-5 w-5" />
+      Verfügbare Zeit
+    </h2>
 
-      </DialogContent>
-    </Dialog>
-  );
+    <div className="grid grid-cols-3 gap-2 border rounded-lg p-3">
+      {timeSlots?.map((time, index) => (
+        <h2
+          key={index}
+          disabled={isPastTime(time) || !selectedProcedureId}
+          onClick={() => setSelectedTimeSlot(time)}
+          className={`p-2 border rounded-full text-center
+            hover:bg-green-600 hover:text-white cursor-pointer
+            ${time === selectedTimeSlot && "bg-green-600 text-white"}`}>
+          {time}
+        </h2>
+      ))}
+    </div>
+  </div>
+</div>
+</div>
+</DialogDescription>
+</DialogHeader>
+
+<DialogFooter className="flex justify-between mr-5">
+<DialogClose asChild>
+<div>
+<Button className="m-3" variant="destructive" >Close</Button>
+<Button onClick={saveBooking} disabled={!(date && selectedTimeSlot) || loading}>
+  {loading ? "Saving..." : "Aufzeichnen"}
+</Button>
+</div>
+</DialogClose>
+</DialogFooter>
+
+</DialogContent>
+</Dialog>
+);
 }
+
 
 export default BookAppointment;

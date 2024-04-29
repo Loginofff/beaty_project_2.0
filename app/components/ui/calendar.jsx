@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
-
 import { cn } from "/lib/utils";
 import { buttonVariants } from "../ui/button";
 
@@ -11,14 +10,10 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }) {
-  // Получаем текущую дату для использования в качестве минимальной границы
-  const today = new Date();
-
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
-      disabledDays={{ before: today }} // Делаем прошедшие даты неактивными
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -54,8 +49,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" {...props} />,
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" {...props} />,
+        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
+        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
       {...props}
     />
