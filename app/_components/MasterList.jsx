@@ -9,10 +9,10 @@ function MasterList() {
   const categories = [
     { id: 1, name: "FRISEUR" },
     { id: 2, name: "NÄGEL" },
-    { id: 3, name: "KOSMETIK" },
-    { id: 5, name: "HAARENVERFUNG" },
-    { id: 6, name: "MAKEUP" },
-    { id: 7, name: "MASSAGE" },
+    { id: 3, name: "HAARENVERFUNG" },
+    { id: 4, name: "KOSMETIK" },
+    { id: 5, name: "MASSAGE" },
+    { id: 6, name: "MAKEUP" }, 
   ];
 
   const [masterList, setMasterList] = useState([]);

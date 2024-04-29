@@ -5,8 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/ta
 import BookingList from "../my-booking/_components/BookingList";
 
 function MyBooking({ accessToken }) {
-
-
   const [upcomingBookingList, setUpcomingBookingList] = useState([]);
   const [expiredBookingList, setExpiredBookingList] = useState([]);
 
@@ -36,7 +34,7 @@ function MyBooking({ accessToken }) {
       const userId = decodedToken.user_id;
       console.log("User ID:", userId);
 
-      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER +`/api/bookings/${userId}?status=CONFIRMED`, {
+      const res = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER + `/api/bookings/${userId}?status=CONFIRMED`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +56,38 @@ function MyBooking({ accessToken }) {
       const upcomingBookings = data.filter(booking => new Date(booking.dateTime) >= currentDate);
       const expiredBookings = data.filter(booking => new Date(booking.dateTime) < currentDate);
 
-      setUpcomingBookingList(upcomingBookings);
+      // Fetch procedure information and master information for each booking
+      const updatedUpcomingBookings = await Promise.all(upcomingBookings.map(async (booking) => {
+        const procedureRes = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER + `/api/procedures/${booking.procedureId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentUser.accessToken}`,
+            "accept": "*/*",
+          },
+        });
+        const procedureData = await procedureRes.json();
+        console.log("Procedure data:", procedureData);
+
+        const masterRes = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER + `/api/users/${booking.masterId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentUser.accessToken}`,
+            "accept": "*/*",
+          },
+        });
+        const masterData = await masterRes.json();
+        console.log("Master data:", masterData);
+
+        return {
+          ...booking,
+          procedureInfo: procedureData,
+          masterInfo: masterData
+        };
+      }));
+
+      setUpcomingBookingList(updatedUpcomingBookings);
       setExpiredBookingList(expiredBookings);
     } catch (error) {
       console.error("Error fetching bookings:", error);

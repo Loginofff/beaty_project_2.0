@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -34,7 +33,10 @@ function Search({ params }) {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER +`/api/users/by-category/${categoryId}`);
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
+          `/api/users/by-category/${categoryId}`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch");
       }
@@ -49,37 +51,43 @@ function Search({ params }) {
   };
 
   const MasterCard = ({ master }) => {
-    const categoryNames = master.categoryIds.map(categoryId => {
-      const category = categories.find(cat => cat.id === categoryId);
+    const categoryNames = master.categoryIds.map((categoryId) => {
+      const category = categories.find((cat) => cat.id === categoryId);
       return category ? category.name : null;
     });
 
     return (
-      <div className="border-[1px] rounded-lg p-3 cursor-pointer hover:border-green-700 hover:shadow-sm transition-all ease-in-out mt-5">
-        <div className="items-baseline flex flex-col">
-          <div className="flex justify-between items-center">
-
-          <img src={master.profileImageUrl} alt="searchPhoto"
-              className="rounded-full w-20 h-20 mr-10 " />
-
-            <div>
-              <h2 className="font-bold ml-2">
-                {master.firstName} {master.lastName}
-              </h2>
-
-              <h2 className="text-gray-500 text-sm ml-2 mt-1">Address: {master.address}</h2>
-              <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-2 text-white">
-                {categoryNames.join(", ")}
-              </p>
-            </div>
-
-            <div className="ml-36">
-              <Link href={`/details/${master.id}`}>
-                <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
-                  Booking Jetzt
-                </button>
-              </Link>
-            </div>
+      <div className="border-[1px] rounded-lg p-3 cursor-pointer hover:border-green-700 hover:shadow-sm transition-all ease-in-out mt-5 master-card-container">
+        <div className="flex items-center">
+          <img
+            src={master.profileImageUrl}
+            alt="searchPhoto"
+            style={{
+              width: "90px",
+              height: "90px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              marginRight: "10px",
+            }}
+          />
+          <div className="ml-2">
+          <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-1 text-white">
+              {categoryNames.join(", ")}
+            </p>
+            <h2 className="font-bold m-2">
+              {master.firstName} {master.lastName}
+            </h2>
+            <h2 className="text-gray-500 text-sm mt-2">
+              Address: {master.address}
+            </h2>
+            
+          </div>
+          <div className="ml-auto">
+            <Link href={`/details/${master.id}`}>
+              <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
+                Booking Jetzt
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -88,19 +96,17 @@ function Search({ params }) {
 
   return (
     <div>
-      <div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : masters.length > 0 ? (
-          masters.map((master) => (
-            <MasterCard key={master.id} master={master} />
-          ))
-        ) : (
-          <p>No masters found in this category.</p>
-        )}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : masters.length > 0 ? (
+        masters.map((master) => (
+          <MasterCard key={master.id} master={master} />
+        ))
+      ) : (
+        <p>No masters found in this category.</p>
+      )}
     </div>
   );
 }
