@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { AuthContext } from "../../context/AuthContext";
+
 
 function CreateAccount() {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +16,7 @@ function CreateAccount() {
   const [hashPassword, setHashPassword] = useState("");
   const [role, setRole] = useState("CLIENT");
   const router = useRouter();
+  const { setUser } = useContext(AuthContext)
 
   const onCreateAccount = async () => {
     try {
@@ -22,7 +25,7 @@ function CreateAccount() {
         lastName,
         email,
         role,
-        hashPassword, // Вместо password используем hashPassword
+        hashPassword, 
       };
 
       const res = await fetch(
@@ -43,6 +46,7 @@ function CreateAccount() {
 
       const data = await res.json();
       console.log(data);
+      setUser("user");
       sessionStorage.setItem("user", JSON.stringify(data));
       toast("Account created successfully");
       router.push("/");

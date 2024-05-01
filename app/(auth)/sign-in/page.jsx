@@ -9,11 +9,12 @@ import { toast } from "sonner";
 import { AuthContext } from "../../context/AuthContext";
 
 
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const {setUser } = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext)
 
   const onLoginAccount = async () => {
     try {
@@ -38,13 +39,12 @@ function SignIn() {
       const data = await res.json();
       console.log(data);
       setUser("user");
-      // sessionStorage.getItem("user", data);
       sessionStorage.setItem('user', JSON.stringify(data))
       toast("Login successfully");
       router.push("/");
     } catch (error) {
       console.error("Error login account:", error);
-      toast("falscher Login oder Passwort");
+      toast("Falscher Login oder Passwort");
     }
   };
 
