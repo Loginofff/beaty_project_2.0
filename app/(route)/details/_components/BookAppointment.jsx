@@ -181,13 +181,13 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
                     Verfügbare Zeit
                   </h2>
 
-                  <div className="grid grid-cols-3 gap-2 border rounded-lg p-3">
+                  <div className="grid grid-cols-3 gap-2 rounded-lg p-3" >
                     {timeSlots?.map((time, index) => (
                       <h2
                         key={index}
                         disabled={isPastTime(time) || !selectedProcedureId}
                         onClick={() => setSelectedTimeSlot(time)}
-                        className={`p-2 border rounded-full text-center
+                        className={`p-2 border border-black rounded-full text-center
             hover:bg-green-600 hover:text-white cursor-pointer
             ${time === selectedTimeSlot && "bg-green-600 text-white"}`}
                       >

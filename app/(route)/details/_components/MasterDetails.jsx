@@ -81,38 +81,50 @@ function MasterDetails({ master }) {
               <FaPhone />
               {master.phoneNumber}
             </h2>
-            <BookAppointment masterId={master.id} selectedProcedureId={selectedProcedureId} />
-          </div>
-          <div className="md:col-span-1 mt-5  md:mt-0 md:col-start-3 flex flex-col">
-            <div className=" font-bold text-black border p-2 mt-2 rounded-lg w-full">
+            <div className="font-bold text-black border p-2 mt-2 rounded-lg w-full mr-5">
               {master.description}
             </div>
+          </div>
+
+          <div className="md:col-span-1 mt-5  md:mt-0 md:col-start-3 flex flex-col m-5">
             <div className="mt-5">
               {procedures.map((procedure) => (
-                <div
-                  key={procedure.id}
-                  className={`bg-green-700 text-white p-2 mt-2 rounded-lg ml-10 ${
-                    selectedProcedureId === procedure.id ? "bg-blue-500" : ""
-                  }`}
-                >
-                  <button
-                    className={`hover:bg-green-600 hover:text-white cursor-pointer ${
-                      selectedProcedureId === procedure.id
-                        ? "bg-green-600 text-white rounded-lg p-1"
-                        : ""
-                    }`}
-                    onClick={() => handleProcedureSelection(procedure.id)}
-                  >
-                    {procedure.name} - {procedure.price} EUR
-                  </button>
-                </div>
+           <div
+           key={procedure.id}
+           className={`bg-green-700 text-white p-2 mt-2 rounded-lg ml-10 ${
+             selectedProcedureId === procedure.id ? "bg-blue-500" : ""
+           }`}
+         >
+           <button
+             className={`hover:bg-green-600 hover:text-white cursor-pointer rounded-lg p-1 ${
+               selectedProcedureId === procedure.id
+                 ? "bg-green-600 text-white"
+                 : ""
+             }`}
+             onClick={() => handleProcedureSelection(procedure.id)}
+           >
+             {procedure.name} - {procedure.price} EUR
+           </button>
+         </div>
+         
               ))}
+              <div className="flex justify-center mt-2">
+                <BookAppointment
+                  masterId={master.id}
+                  selectedProcedureId={selectedProcedureId}
+                />
+              </div>
             </div>
           </div>
         </div>
       )}
+      <p>Mein Portofolio</p>
     </>
+    
   );
 }
 
+
+
 export default MasterDetails;
+
