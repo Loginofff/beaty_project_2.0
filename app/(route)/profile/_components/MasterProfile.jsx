@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import Select from "react-select";
 
 const MasterProfile = ({ user }) => {
   const [editing, setEditing] = useState(false);
@@ -19,14 +20,15 @@ const MasterProfile = ({ user }) => {
       toast.error("Please enter an image URL.");
       return;
     }
-  
+
     const data = {
-      profileImageUrl: imageUrl, 
+      profileImageUrl: imageUrl,
     };
-  
+
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/metadata/${user.user_id}/profileImages`,
+        process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
+          `/api/metadata/${user.user_id}/profileImages`,
         {
           method: "POST",
           headers: {
@@ -35,14 +37,14 @@ const MasterProfile = ({ user }) => {
           body: JSON.stringify(data),
         }
       );
-  
+
       if (response.ok) {
         console.log(data);
         toast.success(
           "Photo added successfully. It will be displayed in the profile."
         );
-        setProfileImage(imageUrl); 
-        setImageUrl(""); 
+        setProfileImage(imageUrl);
+        setImageUrl("");
       } else {
         toast.error("An error occurred while adding photo.");
         console.log(data);
@@ -57,7 +59,10 @@ const MasterProfile = ({ user }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${user.user_id}`);
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
+            `/api/users/${user.user_id}`
+        );
         if (response.ok) {
           const userData = await response.json();
           console.log("User data retrieved:", userData);
@@ -65,7 +70,6 @@ const MasterProfile = ({ user }) => {
         } else {
           console.error("Failed to fetch user data:", response.status);
         }
-        
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -95,13 +99,17 @@ const MasterProfile = ({ user }) => {
     console.log("Data being sent to the server:", userDetails);
 
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/users/${user.user_id}/details`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userDetails),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
+          `/api/users/${user.user_id}/details`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userDetails),
+        }
+      );
 
       if (response.ok) {
         toast("Information successfully saved on the server");
@@ -132,9 +140,12 @@ const MasterProfile = ({ user }) => {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/categories`);
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_PRODUCTION_SERVER + `/api/categories`
+        );
         if (response.ok) {
           const data = await response.json();
+          console.log("Categories data:", data);
           setCategories(data);
         } else {
           throw new Error("Failed to fetch categories");
@@ -148,22 +159,30 @@ const MasterProfile = ({ user }) => {
   }, []);
 
   useEffect(() => {
-    async function fetchProcedures() {
-      if (userData && userData.procedureIds) {
-        const promises = userData.procedureIds.map((id) =>
-          fetch(process.env.NEXT_PUBLIC_PRODUCTION_SERVER+`/api/procedures/${id}`).then((response) => response.json())
+    async function fetchProceduresForSelectedCategories() {
+      if (categoryIds.length > 0) {
+        const promises = categoryIds.map((categoryId) =>
+          fetch(
+            process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
+              `/api/procedures/by-category/${categoryId}`
+          ).then((response) => response.json())
         );
         try {
           const results = await Promise.all(promises);
-          setProcedures(results);
+          console.log("Procedures data:", results);
+          const procedures = results.flat(); // Flatten the array of arrays into a single array
+          setProcedures(procedures);
         } catch (error) {
           console.error("Error fetching procedures:", error);
         }
+      } else {
+        // Если нет выбранных категорий, очищаем список процедур
+        setProcedures([]);
       }
     }
 
-    fetchProcedures();
-  }, [userData]);
+    fetchProceduresForSelectedCategories();
+  }, [categoryIds]); // Включаем categoryIds в зависимости
 
   const getCategoryNames = (categoryIds) => {
     return categoryIds
@@ -193,29 +212,32 @@ const MasterProfile = ({ user }) => {
 
       {!editing ? (
         <>
-
-        <div className="flex justify-between ">
-  <div>
-    <p className="text-green-900 mb-3">Name: {userData?.firstName}</p>
-    <p className="text-green-900 mb-3">Last Name: {userData?.lastName}</p>
-    <p className="text-green-900 mb-3">Email: {userData?.email}</p>
-    <p className="text-green-900 mb-3">Phone Number: {phoneNumber}</p>
-    <p className="text-green-900 mb-3">Address: {address}</p>
-  </div>
-  <div className="mr-6">
-    {profileImage && (
-      <img
-        src={profileImage}
-        alt="Profile"
-        className="rounded-full w-40 h-40 mr-10"
-      />
-    )}
-  </div>
-</div>
-
-
-         
-          
+          <div className="flex justify-between ">
+            <div>
+              <p className="text-green-900 mb-3">Name: {userData?.firstName}</p>
+              <p className="text-green-900 mb-3">
+                Last Name: {userData?.lastName}
+              </p>
+              <p className="text-green-900 mb-3">Email: {userData?.email}</p>
+              <p className="text-green-900 mb-3">Phone Number: {phoneNumber}</p>
+              <p className="text-green-900 mb-3">Address: {address}</p>
+            </div>
+            <div className="mr-6">
+              {profileImage && (
+                <img
+                src={profileImage}
+                alt="profilePhoto"
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  marginRight: "40px",
+                }}
+              />
+              )}
+            </div>
+          </div>
 
           <p className="text-green-900 mb-3">
             Category: {getCategoryNames(categoryIds)}
@@ -224,13 +246,13 @@ const MasterProfile = ({ user }) => {
             Procedure: {getProcedureNames(procedureIds)}
           </p>
 
-          <p className="bg-green-300 p-4 rounded-lg shadow-md m-5">
+          <p className="text-green-900 mb-2 ">
             Description: {description}
           </p>
 
           <button
             onClick={handleEditClick}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Edit Profile
           </button>
@@ -241,7 +263,7 @@ const MasterProfile = ({ user }) => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="block border border-gray-300 rounded-md p-2 mb-2"
+            className="block border border-gray-300 rounded-md p-2 mb-2 "
             placeholder="Description"
           />
           <input
@@ -258,24 +280,52 @@ const MasterProfile = ({ user }) => {
             className="block border border-gray-300 rounded-md p-2 mb-2"
             placeholder="Address"
           />
-          <input
-            type="text"
-            value={categoryIds.join(",")}
-            onChange={(e) => setCategoryIds(e.target.value.split(","))}
-            className="block border border-gray-300 rounded-md p-2 mb-2"
-            placeholder="Category IDs (comma separated)"
-          />
-          <input
-            type="text"
-            value={procedureIds.join(",")}
-            onChange={(e) => setProcedureIds(e.target.value.split(","))}
-            className="block border border-gray-300 rounded-md p-2 mb-2"
-            placeholder="Procedure IDs (comma separated)"
-          />
+
+          <div style={{ width: "30%" }}>
+          <label className="block text-sm font-medium text-gray-700 mt-2">Select Categories</label>
+            <Select
+              options={categories.map((category) => ({
+                value: category.id,
+                label: category.name,
+              }))}
+              value={categoryIds.map((id) => ({
+                value: id,
+                label: categories.find((cat) => cat.id === id)?.name || "",
+              }))}
+              onChange={(selectedOptions) =>
+                setCategoryIds(selectedOptions.map((option) => option.value))
+              }
+              isMulti
+            />
+          </div>
+
+
+           
+          <div style={{ width: "30%" }}>
+          <label className="block text-sm font-medium text-gray-700 mt-2">Select Procedures</label>
+            <Select
+              options={procedures
+                .filter((proc) =>
+                  categoryIds.some((catId) => proc.categoryId === catId)
+                )
+                .map((procedure) => ({
+                  value: procedure.id,
+                  label: procedure.name,
+                }))}
+              value={procedureIds.map((id) => ({
+                value: id,
+                label: procedures.find((proc) => proc.id === id)?.name || "",
+              }))}
+              onChange={(selectedOptions) =>
+                setProcedureIds(selectedOptions.map((option) => option.value))
+              }
+              isMulti
+            />
+          </div>
 
           <button
             onClick={handleSaveClick}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+            className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
           >
             Save Changes
           </button>
@@ -297,7 +347,7 @@ const MasterProfile = ({ user }) => {
         />
         <button
           onClick={handleAddPhoto}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+          className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mr-2"
         >
           Add Photo
         </button>
@@ -307,3 +357,4 @@ const MasterProfile = ({ user }) => {
 };
 
 export default MasterProfile;
+

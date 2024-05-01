@@ -53,15 +53,15 @@ function MasterList() {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
        lg:grid-cols-4 gap-7 mt-4" 
        >
+        
         {masterList&&masterList.map((master, index)=>(
+          
            <div className="border-[1px] rounded-lg p-3
                cursor-pointer hover:border-green-700 hover:shadow-sm 
                transition-all ease-in-out" key={index}> 
-               
-            <img src={master.profileImageUrl} width={500} height={400}
-              className="h-[400px] w-full object-cover rounded-lg"
-              />
-
+      <Link href={`/details/${master.id}`}>
+              <img src={master.profileImageUrl} alt={`${master.firstName} ${master.lastName}`} className="h-[400px] w-full object-cover rounded-lg cursor-pointer" />
+            </Link>
       <div className="mt-3 items-baseline flex flex-col">
              <h2 className="text-[11px] bg-green-900 p-2 rounded-full px-2
               text-white ">{getCategoryNames(master.categoryIds)}</h2>
