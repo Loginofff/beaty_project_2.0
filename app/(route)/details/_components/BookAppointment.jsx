@@ -104,13 +104,14 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
       console.log("Booking data:", bookingData);
 
       const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      };
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("user"))?.accessToken}`,
+      },
+      body: JSON.stringify(bookingData),
+    };
 
       console.log("Request being sent:", requestOptions);
 

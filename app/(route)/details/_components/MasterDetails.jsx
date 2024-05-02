@@ -3,15 +3,13 @@ import { MapPin } from "lucide-react";
 import { FaPhone } from "react-icons/fa";
 import BookAppointment from "./BookAppointment";
 import { MdEmail } from "react-icons/md";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 function MasterDetails({ master }) {
   const [selectedProcedureId, setSelectedProcedureId] = useState(null);
-
-  const handleProcedureSelection = (procedureId) => {
-    setSelectedProcedureId(procedureId);
-  };
-
   const [procedures, setProcedures] = useState([]);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     async function fetchProcedures() {
@@ -27,7 +25,19 @@ function MasterDetails({ master }) {
     if (master && master.procedureIds) {
       fetchProcedures();
     }
+
+    if (master && master.portfolioImageUrls) {
+      const images = master.portfolioImageUrls.map((url) => ({
+        original: url,
+        thumbnail: url,
+      }));
+      setImages(images);
+    }
   }, [master]);
+
+  const handleProcedureSelection = (procedureId) => {
+    setSelectedProcedureId(procedureId);
+  };
 
   const categories = [
     { id: 1, name: "FRISEUR" },
@@ -89,24 +99,23 @@ function MasterDetails({ master }) {
           <div className="md:col-span-1 mt-5  md:mt-0 md:col-start-3 flex flex-col m-5">
             <div className="mt-5">
               {procedures.map((procedure) => (
-           <div
-           key={procedure.id}
-           className={`bg-green-700 text-white p-2 mt-2 rounded-lg ml-10 ${
-             selectedProcedureId === procedure.id ? "bg-blue-500" : ""
-           }`}
-         >
-           <button
-             className={`hover:bg-green-600 hover:text-white cursor-pointer rounded-lg p-1 ${
-               selectedProcedureId === procedure.id
-                 ? "bg-green-600 text-white"
-                 : ""
-             }`}
-             onClick={() => handleProcedureSelection(procedure.id)}
-           >
-             {procedure.name} - {procedure.price} EUR
-           </button>
-         </div>
-         
+                <div
+                  key={procedure.id}
+                  className={`bg-green-700 text-white p-2 mt-2 rounded-lg ml-10 ${
+                    selectedProcedureId === procedure.id ? "bg-blue-500" : ""
+                  }`}
+                >
+                  <button
+                    className={`hover:bg-green-600 hover:text-white cursor-pointer rounded-lg p-1 ${
+                      selectedProcedureId === procedure.id
+                        ? "bg-green-600 text-white"
+                        : ""
+                    }`}
+                    onClick={() => handleProcedureSelection(procedure.id)}
+                  >
+                    {procedure.name} - {procedure.price} EUR
+                  </button>
+                </div>
               ))}
               <div className="flex justify-center mt-2">
                 <BookAppointment
@@ -118,13 +127,19 @@ function MasterDetails({ master }) {
           </div>
         </div>
       )}
-      <p>Mein Portofolio</p>
+
+      {/* Portfolio Images */}
+      {images.length > 0 && (
+        <div className="mt-10 p-5 border-[1px] rounded-lg">
+          <h2 className="text-xl font-bold mb-3">Portfolio</h2>
+          <ImageGallery 
+              width={300}
+              height={400}
+              className="rounded-lg h-[400px] w-[300px] object-cover" items={images} />
+        </div>
+      )}
     </>
-    
   );
 }
 
-
-
 export default MasterDetails;
-

@@ -106,6 +106,7 @@ const MasterProfile = ({ user }) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("user"))?.accessToken}`,
           },
           body: JSON.stringify(userDetails),
         }
