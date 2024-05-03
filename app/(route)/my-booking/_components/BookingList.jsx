@@ -101,7 +101,7 @@ function BookingList({ bookingList }) {
               alt="Appointment"
               width={70}
               height={70}
-              className="rounded-full h-[70] w-[70] object-cover mr-5"
+              className=" h-[70] w-[70] object-cover mr-5"
             />
 
             <div className="flex flex-col gap-2">

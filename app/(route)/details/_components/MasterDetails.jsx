@@ -12,6 +12,7 @@ function MasterDetails({ master }) {
   const [selectedProcedureId, setSelectedProcedureId] = useState(null);
   const [procedures, setProcedures] = useState([]);
   const [images, setImages] = useState([]);
+  const [showAllReviews, setShowAllReviews] = useState(false);
 
   useEffect(() => {
     async function fetchProcedures() {
@@ -131,30 +132,35 @@ function MasterDetails({ master }) {
         </div>
       )}
 
-      <div className="flex gap-4 mt-5">
-        {/* Master Reviews */}
-        <div className="w-full md:w-1/2">
-          <div className="p-4 border rounded-lg h-full">
-            <MasterReviews master={master} />
-          </div>
-        </div>
+<div className="flex gap-4 mt-5">
+  {/* Master Reviews */}
+  <div
+    className="w-full md:w-1/2 border rounded-lg"
+    style={{ minHeight: "200px", maxHeight: "810px", overflowY: "auto" }}
+  >
+    <div className="p-4 h-full">
+      <MasterReviews master={master} limit={showAllReviews ? null : 4} />
+    </div>
+  </div>
 
-        {/* Portfolio Images */}
-        <div className="w-full md:w-1/2">
-          {images.length > 0 && (
-            <div className="mt-4 md:mt-0 p-4 border rounded-lg h-full">
-              <div className="max-h-[400px]">
-                <ImageGallery
-                  width={200}
-                  height={300}
-                  className="rounded-lg h-full w-full object-cover"
-                  items={images}
-                />
-              </div>
-            </div>
-          )}
+  {/* Portfolio Images */}
+  <div className="w-full md:w-1/2 border rounded-lg">
+    {images.length > 0 && (
+      <div className="mt-4 md:mt-0 p-4 h-full">
+        <div className="max-h-[400px]">
+          <ImageGallery
+            width={200}
+            height={300}
+            style={{ minHeight: "200px", maxHeight: "800px", overflowY: "auto" }}
+            items={images}
+          />
         </div>
       </div>
+    )}
+  </div>
+</div>
+
+
     </>
   );
 }
