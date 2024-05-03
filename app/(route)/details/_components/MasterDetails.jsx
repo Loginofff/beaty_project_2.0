@@ -5,6 +5,8 @@ import BookAppointment from "./BookAppointment";
 import { MdEmail } from "react-icons/md";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import MasterRating from "../../details/_components/Rating";
+import MasterReviews from "../../details/_components/Review";
 
 function MasterDetails({ master }) {
   const [selectedProcedureId, setSelectedProcedureId] = useState(null);
@@ -91,6 +93,7 @@ function MasterDetails({ master }) {
               <FaPhone />
               {master.phoneNumber}
             </h2>
+            <div>{master && <MasterRating master={master} />}</div>
             <div className="font-bold text-black border p-2 mt-2 rounded-lg w-full mr-5">
               {master.description}
             </div>
@@ -128,18 +131,33 @@ function MasterDetails({ master }) {
         </div>
       )}
 
-      {/* Portfolio Images */}
-      {images.length > 0 && (
-        <div className="mt-10 p-5 border-[1px] rounded-lg">
-          <h2 className="text-xl font-bold mb-3">Portfolio</h2>
-          <ImageGallery 
-              width={300}
-              height={400}
-              className="rounded-lg h-[400px] w-[300px] object-cover" items={images} />
+      <div className="flex gap-4 mt-5">
+        {/* Master Reviews */}
+        <div className="w-full md:w-1/2">
+          <div className="p-4 border rounded-lg h-full">
+            <MasterReviews master={master} />
+          </div>
         </div>
-      )}
+
+        {/* Portfolio Images */}
+        <div className="w-full md:w-1/2">
+          {images.length > 0 && (
+            <div className="mt-4 md:mt-0 p-4 border rounded-lg h-full">
+              <div className="max-h-[400px]">
+                <ImageGallery
+                  width={200}
+                  height={300}
+                  className="rounded-lg h-full w-full object-cover"
+                  items={images}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 }
 
 export default MasterDetails;
+

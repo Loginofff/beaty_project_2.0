@@ -132,7 +132,7 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
       setDate(new Date());
     } catch (error) {
       console.error("Error saving booking:", error);
-      toast("Wähle das Verfahren aus", { type: "error" });
+      toast("Login oder wählen Sie das Verfahren aus", { type: "error" });
     } finally {
       setLoading(false);
     }
