@@ -122,6 +122,7 @@ export default function Map() {
         width: "900px",
         height: "600px",
         borderRadius: "10px",
+        overflow: "hidden", // Обрезаем содержимое, чтобы тень не выходила за пределы
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
       }}
     >
@@ -145,34 +146,35 @@ export default function Map() {
         <MapPin size={20} className="ml-3 text-gray-400" />
       </div>
 
-      <MapContainer
-        center={center} 
-        zoom={10}
-        style={{  width: "900px",
-        height: "600px", borderRadius: "10px" }}
-        whenCreated={addSearchControlToMap}
-      >
-        <TileLayer
-          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* Отображаем маркеры на карте */}
-        {markers.map((marker, index) => (
-          <CircleMarker
-            key={index}
-            center={[marker.lat, marker.lng]}
-            radius={10}
-            color="transparent"
-            fillColor="green"
-            opacity={0.5}
-          >
-            <Popup>
-              <h2>{marker.label}</h2>
-              <p>{marker.address}</p>
-            </Popup>
-          </CircleMarker>
-        ))}
-      </MapContainer>
+      <div style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)" }}>
+        <MapContainer
+          center={center} 
+          zoom={10}
+          style={{ width: "900px", height: "600px", borderRadius: "10px" }}
+          whenCreated={addSearchControlToMap}
+        >
+          <TileLayer
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {/* Отображаем маркеры на карте */}
+          {markers.map((marker, index) => (
+            <CircleMarker
+              key={index}
+              center={[marker.lat, marker.lng]}
+              radius={10}
+              color="transparent"
+              fillColor="green"
+              opacity={0.5}
+            >
+              <Popup>
+                <h2>{marker.label}</h2>
+                <p>{marker.address}</p>
+              </Popup>
+            </CircleMarker>
+          ))}
+        </MapContainer>
+      </div>
     </div>
   );
 }
