@@ -10,7 +10,7 @@ function BackgroundAnimation() {
         style={{
           position: "absolute",
           width: "100%",
-          height: "250%",
+          height: "350%",
           zIndex: "-1",
         }}
       >
