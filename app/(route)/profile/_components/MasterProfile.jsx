@@ -183,7 +183,7 @@ const MasterProfile = ({ user }) => {
     }
 
     fetchProceduresForSelectedCategories();
-  }, [categoryIds]); // Включаем categoryIds в зависимости
+  }, [categoryIds]); 
 
   const getCategoryNames = (categoryIds) => {
     return categoryIds

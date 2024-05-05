@@ -8,65 +8,58 @@ export default function Map() {
   const [query, setQuery] = useState("");
   const [allMarkers, setAllMarkers] = useState([
     {
-      lat: 52.520008,
-      lng: 13.404954,
-      label: "Berlin",
-      address: "Berlin, Germany",
-      index: "12587",
-    },
-    {
       lat: 52.4458238,
       lng: 13.6244508,
-      label: "Spreetunnel Friedrichshagen",
+      label: "MASSAGE",
       address: "Spreetunnel, 12587 Berlin",
       index: "12587",
     },
     {
       lat: 52.53566,
       lng: 13.2291925,
-      label: "Aaliyah",
+      label: "MASSAGE",
       address: "Exerzierstraße, 21, 13357 Berlin",
       index: "13357",
     },
     {
       lat: 52.4966583,
       lng: 13.291546,
-      label: "Merita",
+      label: "MAKEUP",
       address: "Johann-Sigismund-Straße, 16, 10369 Berlin",
       index: "12587",
     },
     {
       lat: 52.5233322,
       lng: 13.3827204,
-      label: "Perfect Skin",
+      label: "HAARENVERFUNG",
       address: "Reinhardt str., 15, 10117 Berlin",
       index: "10117",
     },
     {
       lat: 52.4458238,
       lng: 13.6244508,
-      label: "Wimpern Traum",
+      label: "KOSMETIK",
       address: "Mariendorfer Damm, 45, 12109 Berlin",
       index: "12109",
     },
     {
       lat: 52.4487041,
       lng: 13.3828721,
-      label: "Guti",
+      label: "NÄGEL",
       address: "Ernststraße, 64, 13509 Berlin",
       index: "13509",
     },
     {
       lat: 52.4448419,
       lng: 13.5747239,
-      label: "Herzklopfen",
+      label: "FRISEUR",
       address: "Kietzer Straße, 13, 12555 Berlin",
       index: "12555",
     },
     {
       lat: 52.5167983,
       lng: 13.3034053,
-      label: "My Time",
+      label: "FRISEUR",
       address: "Behaimstraße, 4, 10585 Berlin",
       index: "10585",
     },
@@ -109,7 +102,7 @@ export default function Map() {
       provider: new OpenStreetMapProvider(),
       style: "bar",
       autoClose: true,
-      searchLabel: "Post codes or salon",
+      searchLabel: "Postleitzahl oder nach  Behandlung suchen",
       keepResult: true,
       showMarker: false,
     });
@@ -117,15 +110,7 @@ export default function Map() {
   };
 
   return (
-    <div
-      style={{
-        width: "900px",
-        height: "600px",
-        borderRadius: "10px",
-        overflow: "hidden", // Обрезаем содержимое, чтобы тень не выходила за пределы
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
-      }}
-    >
+    <div>
       <div
         style={{ padding: "10px" }}
         className="flex flex-grow items-center mr-2 rounded-lg overflow-hidden"
@@ -135,7 +120,7 @@ export default function Map() {
           type="text"
           value={query}
           onChange={handleQueryChange}
-          placeholder="Post codes oder salon"
+          placeholder="Postleitzahl oder nach  Behandlung suchen"
           style={{
             width: "100%",
             padding: "5px",
@@ -146,34 +131,44 @@ export default function Map() {
         <MapPin size={20} className="ml-3 text-gray-400" />
       </div>
 
-      <div style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)" }}>
-        <MapContainer
-          center={center} 
-          zoom={10}
-          style={{ width: "900px", height: "600px", borderRadius: "10px" }}
-          whenCreated={addSearchControlToMap}
-        >
-          <TileLayer
-            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {/* Отображаем маркеры на карте */}
-          {markers.map((marker, index) => (
-            <CircleMarker
-              key={index}
-              center={[marker.lat, marker.lng]}
-              radius={10}
-              color="transparent"
-              fillColor="green"
-              opacity={0.5}
-            >
-              <Popup>
-                <h2>{marker.label}</h2>
-                <p>{marker.address}</p>
-              </Popup>
-            </CircleMarker>
-          ))}
-        </MapContainer>
+      <div
+        style={{
+          width: "900px",
+          height: "600px",
+          borderRadius: "10px",
+          overflow: "hidden",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)",
+        }}
+      >
+        <div style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.6)" }}>
+          <MapContainer
+            center={center}
+            zoom={10}
+            style={{ width: "900px", height: "600px", borderRadius: "10px" }}
+            whenCreated={addSearchControlToMap}
+          >
+            <TileLayer
+              attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {/* Отображаем маркеры на карте */}
+            {markers.map((marker, index) => (
+              <CircleMarker
+                key={index}
+                center={[marker.lat, marker.lng]}
+                radius={10}
+                color="transparent"
+                fillColor="green"
+                fillOpacity={0.7}
+              >
+                <Popup>
+                  <h2>{marker.label}</h2>
+                  <p>{marker.address}</p>
+                </Popup>
+              </CircleMarker>
+            ))}
+          </MapContainer>
+        </div>
       </div>
     </div>
   );
