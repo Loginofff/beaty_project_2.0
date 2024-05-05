@@ -65,8 +65,9 @@ function BookingList({ bookingList }) {
         process.env.NEXT_PUBLIC_PRODUCTION_SERVER +
           `/api/bookings/${bookingId}`,
         {
-          method: "DELETE",
+          method: "PATCH",
           headers: {
+            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("user"))?.accessToken}`,
             accept: "*/*",
           },
         }
