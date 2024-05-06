@@ -106,7 +106,9 @@ const MasterProfile = ({ user }) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("user"))?.accessToken}`,
+            Authorization: `Bearer ${
+              JSON.parse(sessionStorage.getItem("user"))?.accessToken
+            }`,
           },
           body: JSON.stringify(userDetails),
         }
@@ -183,7 +185,7 @@ const MasterProfile = ({ user }) => {
     }
 
     fetchProceduresForSelectedCategories();
-  }, [categoryIds]); 
+  }, [categoryIds]);
 
   const getCategoryNames = (categoryIds) => {
     return categoryIds
@@ -206,56 +208,65 @@ const MasterProfile = ({ user }) => {
   };
 
   return (
-    <div className="bg-green-100 p-4 rounded-lg shadow-md m-5">
-      <h2 className="text-green-700 text-2xl font-semibold mb-5">
-        Master Profile
-      </h2>
+    <div className="flex justify-center">
+    <div className="bg-blur-sm p-5 m-2 rounded-lg " style={{ width: "1100px" }}>
+    <h2 className="text-green-900 text-2xl font-semibold mb-5">
+    Master Profil
+  </h2>
 
-      {!editing ? (
-        <>
-          <div className="flex justify-between ">
-            <div>
-              <p className="text-green-900 mb-3">Name: {userData?.firstName}</p>
-              <p className="text-green-900 mb-3">
-                Last Name: {userData?.lastName}
-              </p>
-              <p className="text-green-900 mb-3">Email: {userData?.email}</p>
-              <p className="text-green-900 mb-3">Phone Number: {phoneNumber}</p>
-              <p className="text-green-900 mb-3">Address: {address}</p>
-            </div>
-            <div className="mr-6">
-              {profileImage && (
-                <img
-                src={profileImage}
-                alt="profilePhoto"
-                style={{
-                  width: "190px",
-                  height: "190px",
-                  borderRadius: "10%",
-                  objectFit: "cover",
-                  marginRight: "40px",
-                }}
-              />
-              )}
-            </div>
-          </div>
-
+  {!editing ? (
+    <>
+      <div className="flex justify-between ">
+        <div>
           <p className="text-green-900 mb-3">
-            Category: {getCategoryNames(categoryIds)}
+            <span className="font-bold text-xl">Name:</span> {userData?.firstName}
           </p>
           <p className="text-green-900 mb-3">
-            Procedure: {getProcedureNames(procedureIds)}
+            <span className="font-bold text-xl">Nachname:</span> {userData?.lastName}
           </p>
+          <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">E-Mail:</span> {userData?.email}
+          </p>
+          <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">Telefonnummer:</span> {phoneNumber}
+          </p>
+          <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">Adresse:</span> {address}
+          </p>
+        </div>
+        <div>
+          {profileImage && (
+            <img
+              src={profileImage}
+              alt="profilePhoto"
+              style={{
+                width: "190px",
+                height: "190px",
+                borderRadius: "10%",
+                objectFit: "cover",
+                marginRight: "80px",
+              }}
+            />
+          )}
+        </div>
+      </div>
 
-          <p className="text-green-900 mb-2 ">
-            Description: {description}
-          </p>
+      <p className="text-green-900 mb-3">
+        <span className="font-bold text-xl">Beruf:</span> {getCategoryNames(categoryIds)}
+      </p>
+      <p className="text-green-900 mb-3">
+        <span className="font-bold text-xl">Behandlungen:</span> {getProcedureNames(procedureIds)}
+      </p>
+
+      <p className="text-green-900 mb-2">
+        <span className="font-bold text-xl">Beschreibung:</span> {description}
+      </p>
 
           <button
             onClick={handleEditClick}
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
-            Edit Profile
+            Profil bearbeiten
           </button>
         </>
       ) : (
@@ -265,25 +276,27 @@ const MasterProfile = ({ user }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="block border border-gray-300 rounded-md p-2 mb-2 "
-            placeholder="Description"
+            placeholder="Beschreibung"
           />
           <input
             type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             className="block border border-gray-300 rounded-md p-2 mb-2"
-            placeholder="Phone Number"
+            placeholder="Telefonnummer"
           />
           <input
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="block border border-gray-300 rounded-md p-2 mb-2"
-            placeholder="Address"
+            placeholder="Adresse"
           />
 
           <div style={{ width: "30%" }}>
-          <label className="block text-sm font-medium text-gray-700 mt-2">Select Categories</label>
+            <label className="block text-sm font-medium text-gray-700 mt-2">
+            Wähle deinen Beruf aus
+            </label>
             <Select
               options={categories.map((category) => ({
                 value: category.id,
@@ -300,10 +313,10 @@ const MasterProfile = ({ user }) => {
             />
           </div>
 
-
-           
           <div style={{ width: "30%" }}>
-          <label className="block text-sm font-medium text-gray-700 mt-2">Select Procedures</label>
+            <label className="block text-sm font-medium text-gray-700 mt-2">
+            Wähle Behandlungen, die du anbietest
+            </label>
             <Select
               options={procedures
                 .filter((proc) =>
@@ -328,13 +341,13 @@ const MasterProfile = ({ user }) => {
             onClick={handleSaveClick}
             className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
           >
-            Save Changes
+            Änderungen speichern
           </button>
           <button
             onClick={() => setEditing(false)}
             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
-            Cancel
+            Abbrechen
           </button>
         </>
       )}
@@ -343,16 +356,18 @@ const MasterProfile = ({ user }) => {
           type="text"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="Enter image URL"
+          placeholder="Gib die Bild-URL ein"
           className="block border border-gray-300 rounded-md p-2 mb-2"
+          style={{ color: "black", backgroundColor: "white" }}
         />
         <button
           onClick={handleAddPhoto}
           className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mr-2"
         >
-          Add Photo
+          Foto hinzufügen
         </button>
       </div>
+    </div>
     </div>
   );
 };

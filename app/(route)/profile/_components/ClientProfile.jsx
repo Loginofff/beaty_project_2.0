@@ -50,19 +50,26 @@ const ClientProfile = ({ user }) => {
  
 
   return (
-    <div className="bg-green-100 p-4 rounded-lg shadow-md m-5">
-      <h2 className="text-green-700 text-2xl font-semibold mb-5">Client Profile</h2>
+    <div className="flex justify-center">
+    <div className="bg-blur-sm p-5 m-2 rounded-lg " style={{ width: "1100px" }}>
+      <h2 className="text-green-900 text-2xl font-semibold mb-5">Dein Profil</h2>
     
         <>
-          <p className="text-green-900 mb-3">Name: {user && user.name}</p>
-          <p className="text-green-900 mb-3">Nachname: {user && user.lastName}</p>
-          <p className="text-green-900 mb-3">Email: {user && user.email}</p>
+        <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">Name:</span> {user && user.name}
+          </p>
+          <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">Nachname:</span> {user && user.lastName}
+          </p>
+          <p className="text-green-900 mb-3">
+            <span className="font-bold text-xl">E-Mail:</span> {user && user.email}
+          </p>
    
        
       
         </>
       
-
+        </div>
      
     </div>
   );

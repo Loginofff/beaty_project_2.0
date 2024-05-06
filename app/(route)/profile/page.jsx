@@ -67,7 +67,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="bg-green-50 p-6 rounded-lg shadow-md">
+    <div>
       {userRoles === 'CLIENT' && <ClientProfile user={{ email: userEmail, name: userName, lastName: userLastName, user_id: userId }} />}
       {userRoles === 'MASTER' && <MasterProfile user={{ email: userEmail, name: userName, lastName: userLastName, user_id: userId, description: userDescription, phoneNumber: userPhoneNumber, address: userAddress, categoryIds: userCategoryIds, procedureIds: userProcedureIds }} />}
       {userRoles === 'ADMIN' && <AdminProfile user={{ email: userEmail, name: userName, lastName: userLastName, user_id: userId }} />}

@@ -132,7 +132,7 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
       setDate(new Date());
     } catch (error) {
       console.error("Error saving booking:", error);
-      toast("Login oder wählen Sie das Verfahren aus", { type: "error" });
+      toast("Login oder wählen Sie eine Behandlung aus", { type: "error" });
     } finally {
       setLoading(false);
     }
@@ -209,6 +209,7 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
                 Close
               </Button>
               <Button
+              style={{ backgroundColor: "#006400", color: '#ffffff'}}
                 onClick={saveBooking}
                 disabled={!(date && selectedTimeSlot) || loading}
               >
