@@ -23,7 +23,7 @@ function Hero() {
               <span className="text-green-800"> Spezialisten</span>
             </h2>
 
-            <p className="mt-4 text-gray-600 ">
+            <p className="mt-4 text-black ">
               Willkommen bei Beauty Booking - der Plattform, auf der Schönheit
               ihren Meister findet! Bei uns ist jeder Meister nicht nur ein
               Handwerker, sondern ein echter Künstler, der die Kunst der Pflege

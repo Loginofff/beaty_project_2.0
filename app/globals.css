@@ -95,6 +95,23 @@
     }
     
 
+/* styles.module.css */
+
+:root {
+  --background-color: black; /* Цвет фона по умолчанию (темная тема) */
+  --text-color: white; /* Цвет текста по умолчанию (темная тема) */
+}
+
+.light-theme {
+  --background-color: white; /* Цвет фона для светлой темы */
+  --text-color: black; /* Цвет текста для светлой темы */
+}
+
+.container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 
 
   }

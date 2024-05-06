@@ -65,12 +65,14 @@ export default function Contact() {
 
   return (
     <div className="mt-7">
-      <form className="container" onSubmit={handleSubmit}>
-        <h1 className="text-3xl font-extrabold sm:text-5xl">
+      <form className="container" onSubmit={handleSubmit}
+      style={{ backgroundColor: " transparent" }}
+      >
+        <h1 className="text-green-700 text-3xl font-extrabold sm:text-5xl">
           Kontaktieren Sie uns
           <strong className="block font-extrabold text-rose-700"> bei Fragen. </strong>
         </h1>
-        <div className="email block">
+        <div className="email block text-green-700">
           <label htmlFor="frm-email">Email</label>
           <input
             id="frm-email"
@@ -82,7 +84,7 @@ export default function Contact() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="block phone">
+        <div className="block phone text-green-700">
           <label htmlFor="frm-phone">Phone</label>
           <input
             id="frm-phone"
@@ -95,8 +97,8 @@ export default function Contact() {
           />
         </div>
         <div className="name block">
-          <div>
-            <label htmlFor="frm-first">First Name</label>
+          <div className='text-green-700'>
+            <label htmlFor="frm-first ">First Name</label>
             <input
               id="frm-first"
               type="text"
@@ -107,7 +109,7 @@ export default function Contact() {
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div>
+          <div className='text-green-700'>
             <label htmlFor="frm-last">Last Name</label>
             <input
               id="frm-last"
@@ -120,7 +122,7 @@ export default function Contact() {
             />
           </div>
         </div>
-        <div className="message block">
+        <div className="message block text-green-700">
           <label htmlFor="frm-message">Message</label>
           <textarea
             id="frm-message"
@@ -129,7 +131,7 @@ export default function Contact() {
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
-        <div className="button block">
+        <div className="button block text-green-700">
           <button type="submit">Submit</button>
         </div>
       </form>

@@ -9,30 +9,30 @@ function Footer() {
     <Image src="/logo3.png" alt="logo" width={100} height={100}  />
     </div>
 
-    <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
+    <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-black">
     Vergessen Sie nicht, unsere Seiten in den sozialen Netzwerken zu besuchen, um über 
     die neuesten Nachrichten und Aktionen informiert zu bleiben
     </p>
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> About </a>
+        <a className="text-black transition hover:text-gray-700/75" href="#"> About </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Careers </a>
+        <a className="text-black transition hover:text-gray-700/75" href="#"> Careers </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> History </a>
+        <a className="text-black transition hover:text-gray-700/75" href="#"> History </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Services </a>
+        <a className="text-black transition hover:text-gray-700/75" href="#"> Services </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="#"> Projects </a>
+        <a className="text-black transition hover:text-gray-700/75" href="#"> Projects </a>
       </li>
 
     </ul>

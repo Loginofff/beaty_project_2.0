@@ -65,7 +65,7 @@ const ExplorePage = () => {
       <h2 className="font-bold text-4xl tracking-wide">
         Finde deinen <span className="text-green-800">Meister</span>{" "}
       </h2>
-      <h2 className="text-gray-500 text-xl">
+      <h2 className="text-black text-xl">
         Suchen Sie Ihren Master und buchen Sie einen Termin mit einem Klick
       </h2>
 

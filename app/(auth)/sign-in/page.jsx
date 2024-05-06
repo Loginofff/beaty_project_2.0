@@ -59,19 +59,21 @@ function SignIn() {
     <div className="flex items-baseline justify-center my-20 ">
       <div className="flex flex-col items-center justify-center p-10 bg-blur-sm">
         <h2 className="font-bold text-3xl">Authorization</h2>
-        <h2 className="text-gray-500">Enter your Email and Password</h2>
+        <h2 className="text-black">Enter your Email and Password</h2>
 
         <div className="w-full flex flex-col gap-5 mt-7">
           <Input
             placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ color: "black", backgroundColor: "white" }}
           />
           <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ color: "black", backgroundColor: "white" }}
           />
           <Button  className=" inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300"
             style={{ backgroundColor: "#006400", color: '#ffffff'}}

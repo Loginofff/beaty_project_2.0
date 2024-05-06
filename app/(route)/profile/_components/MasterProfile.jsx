@@ -229,9 +229,9 @@ const MasterProfile = ({ user }) => {
                 src={profileImage}
                 alt="profilePhoto"
                 style={{
-                  width: "150px",
-                  height: "150px",
-                  borderRadius: "50%",
+                  width: "190px",
+                  height: "190px",
+                  borderRadius: "10%",
                   objectFit: "cover",
                   marginRight: "40px",
                 }}

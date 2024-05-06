@@ -86,7 +86,7 @@ function MasterList() {
               <h2 className="font-bold mb-1">
                 {master.firstName} {master.lastName}
               </h2>
-              <h2 className="text-gray-500 text-md">{master.address}</h2>
+              <h2 className="text-black text-md">{master.address}</h2>
               {master && <MasterRating master={master} />}
               <Link className="w-full" href={`/details/${master.id}`}>
                 <h2
