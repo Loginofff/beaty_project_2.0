@@ -45,10 +45,10 @@ function MasterDetails({ master }) {
   const categories = [
     { id: 1, name: "FRISEUR" },
     { id: 2, name: "NÄGEL" },
-    { id: 3, name: "KOSMETIK" },
-    { id: 5, name: "HAARENTFERNUNG" },
+    { id: 3, name: "HAARENTFERNUNG" },
+    { id: 4, name: "KOSMETIK" },
+    { id: 5, name: "MASSAGE" },
     { id: 6, name: "MAKEUP" },
-    { id: 7, name: "MASSAGE" },
   ];
 
   function getCategoryNames(categoryIds, categories) {
