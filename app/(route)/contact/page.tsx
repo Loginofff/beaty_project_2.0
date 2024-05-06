@@ -85,7 +85,7 @@ export default function Contact() {
           />
         </div>
         <div className="block phone text-green-700">
-          <label htmlFor="frm-phone">Phone</label>
+          <label htmlFor="frm-phone">Telefonnummer:</label>
           <input
             id="frm-phone"
             type="text"
@@ -98,7 +98,7 @@ export default function Contact() {
         </div>
         <div className="name block">
           <div className='text-green-700'>
-            <label htmlFor="frm-first ">First Name</label>
+            <label htmlFor="frm-first ">Name:</label>
             <input
               id="frm-first"
               type="text"
@@ -110,7 +110,7 @@ export default function Contact() {
             />
           </div>
           <div className='text-green-700'>
-            <label htmlFor="frm-last">Last Name</label>
+            <label htmlFor="frm-last">Nachname:</label>
             <input
               id="frm-last"
               type="text"
@@ -123,7 +123,7 @@ export default function Contact() {
           </div>
         </div>
         <div className="message block text-green-700">
-          <label htmlFor="frm-message">Message</label>
+          <label htmlFor="frm-message">Nachricht</label>
           <textarea
             id="frm-message"
             name="message"
@@ -131,8 +131,8 @@ export default function Contact() {
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
-        <div className="button block text-green-700">
-          <button type="submit">Submit</button>
+        <div className="button block text-black ">
+          <button type="submit" className='bg-green-700'>Senden</button>
         </div>
       </form>
     </div>
