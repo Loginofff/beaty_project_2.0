@@ -7,7 +7,7 @@ function MasterList() {
   const categories = [
     { id: 1, name: "FRISEUR" },
     { id: 2, name: "NÄGEL" },
-    { id: 3, name: "HAARENVERFUNG" },
+    { id: 3, name: "HAARENTFERNUNG" },
     { id: 4, name: "KOSMETIK" },
     { id: 5, name: "MASSAGE" },
     { id: 6, name: "MAKEUP" },
