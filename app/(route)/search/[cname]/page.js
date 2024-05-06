@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import MasterRating from "../../details/_components/Rating";
 
 function Search({ params }) {
   const [masters, setMasters] = useState([]);
@@ -57,40 +58,46 @@ function Search({ params }) {
     });
 
     return (
-      <div className="border-[1px] rounded-lg p-3 cursor-pointer hover:border-green-700 hover:shadow-sm transition-all ease-in-out mt-5 master-card-container">
-        <div className="flex items-center">
-          <img
-            src={master.profileImageUrl}
-            alt="searchPhoto"
-            style={{
-              width: "90px",
-              height: "90px",
-              borderRadius: "50%",
-              objectFit: "cover",
-              marginRight: "10px",
-            }}
-          />
-          <div className="ml-2">
-          <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-1 text-white">
-              {categoryNames.join(", ")}
-            </p>
-            <h2 className="font-bold m-2">
-              {master.firstName} {master.lastName}
-            </h2>
-            <h2 className="text-gray-500 text-sm mt-2">
-              Address: {master.address}
-            </h2>
+      <Link href={`/details/${master.id}`}>
+        <div className="border-[1px] rounded-lg p-3 cursor-pointer
+         hover:border-green-700 hover:shadow-sm transition-all 
+         ease-in-out mt-5 master-card-container " style={{ height: '200px' }}>
+          <div className="flex items-center">
+            <img
+              src={master.profileImageUrl}
+              alt="searchPhoto"
+              style={{
+                width: "90px",
+                height: "90px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                marginRight: "10px",
+              }}
+            />
+            <div className="ml-2">
             
-          </div>
-          <div className="ml-auto">
-            <Link href={`/details/${master.id}`}>
-              <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
-                Booking Jetzt
-              </button>
-            </Link>
+              <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-1 text-white">
+                {categoryNames.join(", ")}
+              </p>
+              <h2 className="font-bold m-2">
+                {master.firstName} {master.lastName}
+              </h2>
+              <h2 className="text-gray-500 text-sm mt-2">
+                Address: {master.address}
+              </h2>
+              <MasterRating master={master} />
+            </div>
+
+            <div className="ml-auto flex items-center">
+  
+  <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
+    Booking Jetzt
+  </button>
+</div>
+
           </div>
         </div>
-      </div>
+      </Link>
     );
   };
 
@@ -101,9 +108,7 @@ function Search({ params }) {
       ) : error ? (
         <p>{error}</p>
       ) : masters.length > 0 ? (
-        masters.map((master) => (
-          <MasterCard key={master.id} master={master} />
-        ))
+        masters.map((master) => <MasterCard key={master.id} master={master} />)
       ) : (
         <p>No masters found in this category.</p>
       )}
