@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AuthContext } from "../../context/AuthContext";
 
-
 function CreateAccount() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,7 +15,7 @@ function CreateAccount() {
   const [hashPassword, setHashPassword] = useState("");
   const [role, setRole] = useState("CLIENT");
   const router = useRouter();
-  const { setUser } = useContext(AuthContext)
+  const { setUser } = useContext(AuthContext);
 
   const onCreateAccount = async () => {
     try {
@@ -25,7 +24,7 @@ function CreateAccount() {
         lastName,
         email,
         role,
-        hashPassword, 
+        hashPassword,
       };
 
       const res = await fetch(
@@ -38,8 +37,9 @@ function CreateAccount() {
           },
           body: JSON.stringify(userData),
         }
+        
       );
-
+      console.log(userData);
       if (!res.ok) {
         throw new Error("Failed to create account");
       }
@@ -73,28 +73,39 @@ function CreateAccount() {
 
         <div className="w-full flex flex-col gap-5 mt-7">
           <Input
+          style={{ color: "black", backgroundColor: "white" }}
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            pattern="[A-Za-zА-Яа-яЁё]+"
+            title="Please enter only letters for the first name"
           />
           <Input
+          style={{ color: "black", backgroundColor: "white" }}
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            pattern="[A-Za-zА-Яа-яЁё]+"
+            title="Please enter only letters for the last name"
           />
           <Input
+          style={{ color: "black", backgroundColor: "white" }}
             placeholder="name@example.com"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <Input
+          style={{ color: "black", backgroundColor: "white" }}
             type="password"
             placeholder="Password"
             value={hashPassword}
             onChange={(e) => setHashPassword(e.target.value)}
+            title="Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
           />
 
-          <div className=" flex flex-col gap-4 px-5">
+          <div className=" flex  gap-4 px-5">
             <label>
               <input
                 type="radio"
@@ -136,3 +147,4 @@ function CreateAccount() {
 }
 
 export default CreateAccount;
+
