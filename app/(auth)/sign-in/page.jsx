@@ -67,6 +67,7 @@ function SignIn() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={{ color: "black", backgroundColor: "white" }}
+            required
           />
           <Input
             type="password"
@@ -74,6 +75,7 @@ function SignIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             style={{ color: "black", backgroundColor: "white" }}
+            title="Password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"
           />
           <Button  className=" inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300"
             style={{ backgroundColor: "#006400", color: '#ffffff'}}

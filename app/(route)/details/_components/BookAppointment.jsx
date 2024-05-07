@@ -49,7 +49,7 @@ const BookAppointment = ({ masterId, selectedProcedureId }) => {
   const getTime = () => {
     const timeList = [];
 
-    for (let i = 10; i <= 12; i++) {
+    for (let i = 8; i <= 10; i++) {
       timeList.push(`${i}:00 AM`);
       timeList.push(`${i}:30 AM`);
     }
