@@ -77,7 +77,7 @@ function CreateAccount() {
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            pattern="[A-Za-zА-Яа-яЁё]+"
+            pattern="[A-Za-z]+"
             title="Please enter only letters for the first name"
           />
           <Input
@@ -85,7 +85,7 @@ function CreateAccount() {
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            pattern="[A-Za-zА-Яа-яЁё]+"
+            pattern="[A-Za-z]+"
             title="Please enter only letters for the last name"
           />
           <Input
@@ -99,6 +99,7 @@ function CreateAccount() {
           <Input
           style={{ color: "black", backgroundColor: "white" }}
             type="password"
+            required
             placeholder="Password"
             value={hashPassword}
             onChange={(e) => setHashPassword(e.target.value)}
@@ -108,6 +109,7 @@ function CreateAccount() {
           <div className=" flex  gap-4 px-5">
             <label>
               <input
+              
                 type="radio"
                 value="CLIENT"
                 checked={role === "CLIENT"}
@@ -117,6 +119,7 @@ function CreateAccount() {
             </label>
             <label>
               <input
+              style={{ color: "black", backgroundColor: "white" }}
                 type="radio"
                 value="MASTER"
                 checked={role === "MASTER"}
