@@ -101,6 +101,9 @@ function MasterDetails({ master }) {
           </div>
 
           <div className="md:col-span-1 mt-5  md:mt-0 md:col-start-3 flex flex-col m-5">
+            <h2 className="font-bold text-center">
+              Wählen Sie eine Behandlung aus
+            </h2>
             <div className="mt-5">
               {procedures.map((procedure) => (
                 <div
@@ -132,35 +135,36 @@ function MasterDetails({ master }) {
         </div>
       )}
 
-<div className="flex gap-4 mt-5">
-  {/* Master Reviews */}
-  <div
-    className="w-full md:w-1/2 border rounded-lg"
-    style={{ minHeight: "200px", maxHeight: "810px", overflowY: "auto" }}
-  >
-    <div className="p-4 h-full">
-      <MasterReviews master={master} limit={showAllReviews ? null : 4} />
-    </div>
-  </div>
-
-  {/* Portfolio Images */}
-  <div className="w-full md:w-1/2 border rounded-lg">
-    {images.length > 0 && (
-      <div className="mt-4 md:mt-0 p-4 h-full">
-        <div className="max-h-[400px]">
-          <ImageGallery
-            width={200}
-            height={300}
-            style={{ minHeight: "200px", maxHeight: "800px", overflowY: "auto" }}
-            items={images}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+        {/* Portfolio Images */}
+        <div className="w-full border rounded-lg">
+          {images.length > 0 && (
+            <div className="p-4 h-full">
+              <div className="max-h-[400px]">
+                <ImageGallery
+                  width={200}
+                  height={300}
+                  style={{
+                    minHeight: "200px",
+                    maxHeight: "800px",
+                    overflowY: "auto",
+                  }}
+                  items={images}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Master Reviews */}
+        <div
+          className="w-full border rounded-lg"
+          style={{ minHeight: "200px", maxHeight: "810px", overflowY: "auto" }}
+        >
+          <div className="p-4 h-full">
+            <MasterReviews master={master} limit={showAllReviews ? null : 4} />
+          </div>
         </div>
       </div>
-    )}
-  </div>
-</div>
-
-
     </>
   );
 }

@@ -57,7 +57,14 @@
       border-radius: 5px;
       background-color: #e8f0fe;
     }
-    
+    .centered-button {
+      margin: 0 auto;
+      display: block;
+  }
+  .mobile-button-container {
+    width: 100%;
+    text-align: center; /* Центрирование содержимого по горизонтали */
+}
     
     .container textarea {
       margin: 10px 0; /* Уменьшаем отступы сверху и снизу */
@@ -112,6 +119,9 @@
   background-color: var(--background-color);
   color: var(--text-color);
 }
+
+
+
 
 
 

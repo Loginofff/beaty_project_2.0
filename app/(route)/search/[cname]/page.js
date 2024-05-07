@@ -59,10 +59,13 @@ function Search({ params }) {
 
     return (
       <Link href={`/details/${master.id}`}>
-        <div className="border-[1px] rounded-lg p-3 cursor-pointer
+        <div
+          className="border-[1px] rounded-lg p-3 cursor-pointer
          hover:border-green-700 hover:shadow-sm transition-all 
-         ease-in-out mt-5 master-card-container " style={{ height: '200px' }}>
-          <div className="flex items-center">
+         ease-in-out mt-5 "
+          
+        >
+          <div className="flex items-center ">
             <img
               src={master.profileImageUrl}
               alt="searchPhoto"
@@ -75,10 +78,13 @@ function Search({ params }) {
               }}
             />
             <div className="ml-2">
-            
-              <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-1 text-white">
+              <p
+                className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-1 text-white"
+                style={{ width: "200px" }}
+              >
                 {categoryNames.join(", ")}
               </p>
+
               <h2 className="font-bold m-2">
                 {master.firstName} {master.lastName}
               </h2>
@@ -89,12 +95,12 @@ function Search({ params }) {
             </div>
 
             <div className="ml-auto flex items-center">
-  
-  <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
-    Booking Jetzt
-  </button>
-</div>
-
+              <button className="p-2 px-3 border-[1px] border-green-700
+               text-green-700 rounded-full text-center cursor-pointer
+                hover:bg-green-700 hover:text-white">
+                Booking Jetzt
+              </button>
+            </div>
           </div>
         </div>
       </Link>

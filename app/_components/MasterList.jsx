@@ -53,7 +53,10 @@ function MasterList() {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+      [shuffledArray[i], shuffledArray[j]] = [
+        shuffledArray[j],
+        shuffledArray[i],
+      ];
     }
     return shuffledArray;
   };
@@ -89,13 +92,11 @@ function MasterList() {
               <h2 className="text-black text-md">{master.address}</h2>
               {master && <MasterRating master={master} />}
               <Link className="w-full" href={`/details/${master.id}`}>
-                <h2
-                  className="p-2 px-3 border-[1px] border-green-700
-         text-green-700 rounded-full w-full text-center m-2
-         cursor-pointer hover:bg-green-700 hover:text-white"
-                >
-                  Booking Jetzt
-                </h2>
+                <div className="mobile-button-container">
+                  <h2 className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
+                    Booking Jetzt
+                  </h2>
+                </div>
               </Link>
             </div>
           </div>
@@ -106,3 +107,4 @@ function MasterList() {
 }
 
 export default MasterList;
+

@@ -356,13 +356,14 @@ const MasterProfile = ({ user }) => {
           type="text"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
-          placeholder="Gib die Bild-URL ein"
+          placeholder="Foto hochladen"
           className="block border border-gray-300 rounded-md p-2 mb-2"
           style={{ color: "black", backgroundColor: "white" }}
         />
         <button
           onClick={handleAddPhoto}
-          className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mr-2"
+          className="bg-green-600 hover:bg-green-800 text-white 
+          font-bold py-2 px-4 rounded mr-2"
         >
           Foto hinzufügen
         </button>

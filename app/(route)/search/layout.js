@@ -7,7 +7,7 @@ function Layout({ children }) {
       <div className="hidden md:block md:w-1/4 md:h-screen">
         <CategoryList />
       </div>
-      <div className="col-span-2 w-full">{children}</div>
+      <div className="col-span-2 w-full  ">{children}</div>
     </div>
   );
 }
