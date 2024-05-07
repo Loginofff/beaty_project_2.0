@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <section style={{ position: "relative", minHeight: "110vh" }}>
+    <section style={{ position: "relative", minHeight: "80vh" }}>
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:grid-cols-2 lg:gap-16 ">
           <div className=" relative h-60 lg:h-100 overflow-hidden lg:order-last lg:h-full">
